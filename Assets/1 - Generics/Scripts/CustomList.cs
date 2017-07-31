@@ -66,7 +66,7 @@ namespace Generics
         }
 
         // Check if conditions are true
-        static bool isPositiveInt(int i)
+        static bool CheckIfTrue(int i)
         {
             return i > 0;
         }
@@ -75,8 +75,8 @@ namespace Generics
         {
             List<int> intList = new List<int>() { 10, 20, 30, 40 };
 
-            bool res = intList.TrueForAll(isPositiveInt);
 
+            bool res = intList.TrueForAll(CheckIfTrue);
         }
     }
 }

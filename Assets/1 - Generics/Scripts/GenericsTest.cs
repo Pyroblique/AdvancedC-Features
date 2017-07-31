@@ -14,6 +14,8 @@ namespace Generics
             gameObjects = new CustomList<GameObject>(10);
             gameObjects.Add(new GameObject());
 
+            
+
             GameObject firstObject = gameObjects[0];
         }
 

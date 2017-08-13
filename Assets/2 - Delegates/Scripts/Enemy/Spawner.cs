@@ -10,18 +10,13 @@ namespace Delegates
         public GameObject orcPrefab;
         public GameObject trollPrefab;
         public float minAmount = 0, maxAmount = 20;
-        public float spawnRate = 1f; 
+        public float spawnRate = 1f;
+        delegate GameObject ClosestFunc(Vector3 position);
+        ClosestFunc findClosest;
 
-        // Use this for initialization
         void Start()
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            SpawnOrc();
         }
 
         // Goal is to call functions randomly using delegates
@@ -33,8 +28,41 @@ namespace Delegates
 
         void SpawnOrc()
         {
-            // Spawn Orc Prefab
-            // SetTarget on Orc to target
+            // Spawn troll prefab
+            StartCoroutine(OrcSpawn());
+            // SetTarget on troll to target
+            
+        }
+
+        // Spawn Orc Prefab
+        IEnumerator OrcSpawn()
+        {
+            yield return new WaitForSeconds(1); 
+            Instantiate(orcPrefab, transform.position, transform.rotation);
+                    
+        }
+
+        public void SetTarget(Transform target)
+        {
+            this.target = target;
+        }
+        // SetTarget on Orc to target
+        GameObject FindClosestPlayer(Vector3 position)
+        {
+            PlayerMovement[] players = FindObjectsOfType<PlayerMovement>();
+            float minDistance = float.MaxValue;
+            GameObject closest = null;
+            for (int i = 0; i < players.Length; i++)
+            {
+                Vector3 playerPos = players[i].transform.position;
+                float distance = Vector3.Distance(playerPos, position);
+                if (distance <= minDistance)
+                {
+                    distance = minDistance;
+                    closest = players[i].gameObject;
+                }
+            }
+            return closest;
         }
     }
 }

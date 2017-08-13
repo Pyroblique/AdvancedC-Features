@@ -46,6 +46,7 @@ namespace Delegates
         public void SetTarget(Transform target)
         {
             this.target = target;
+            
         }
 
         public bool IsCloseToTarget(float distance)

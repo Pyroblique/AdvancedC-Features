@@ -16,6 +16,7 @@ namespace Delegates
         // Update is called once per frame
         protected override void Update()
         {
+            
             // Call super's update
             base.Update();
             // IF not attacking AND target is within attackRange

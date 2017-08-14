@@ -38,8 +38,12 @@ namespace Delegates
         IEnumerator OrcSpawn()
         {
             yield return new WaitForSeconds(1); 
-            Instantiate(orcPrefab, transform.position, transform.rotation);
-                    
+            // Grabbing clone we just spawned
+            GameObject clone = Instantiate(orcPrefab, transform.position, transform.rotation);
+            // Referring to the Enemy script
+            Enemy enemy = clone.GetComponent<Enemy>();
+            // Telling the enemy what the target is
+            enemy.SetTarget(target);
         }
 
         public void SetTarget(Transform target)

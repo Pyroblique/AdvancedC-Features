@@ -1,16 +1,16 @@
-﻿using System.Collections;
+﻿
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PulseCannon : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace AbstractClasses
+{
+    public class PulseCannon : Weapon
+    {
+        public override void Fire()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

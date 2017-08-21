@@ -7,9 +7,7 @@ namespace AbstractClasses
     public class Movement : MonoBehaviour
     {
         public float acceleration = 25f;
-        public float hyperSpeed = 150f;
-        [Range(0, 1)]
-        public float deceleration = 0.01f;
+        public float hyperSpeed = 150f;     
         public float rotationSpeed = 5f;
 
         private Rigidbody2D rigid;
@@ -24,7 +22,6 @@ namespace AbstractClasses
         void Update()
         {
             Accelerate();
-            Decelerate();
             Rotate();
         }
 
@@ -45,12 +42,6 @@ namespace AbstractClasses
             }
 
             rigid.AddForce(force);
-        }
-
-        void Decelerate()
-        {
-            // velocity = -velocity * deceleration
-            rigid.velocity += -rigid.velocity * deceleration;
         }
 
         void Rotate()

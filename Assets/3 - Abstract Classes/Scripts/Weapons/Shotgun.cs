@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using UnityEditor;
-using System;
+
 
 namespace AbstractClasses
 {
     public class Shotgun : Weapon
     {
+        public int shells = 10;
         public float shootAngle = 45f;
         public float shootRadius = 5f;
 
@@ -29,7 +30,19 @@ namespace AbstractClasses
         public override void Fire()
         {
             // Loop through and spawn
-                // Fire each bullet in the range and direction of player
+            for (int i = 0; i < shells; i++)
+            {
+                // Spawn a new bullet called 'b'   
+                Bullet b = SpawnBullet(transform.position, transform.rotation);
+                // Calculate random angle using shootAngle (Random.Range)
+                float randomAngle = Random.Range(-shootAngle, shootAngle);
+                // GetDir using randomAngle
+                Vector3 direction = GetDir(randomAngle);
+                // Set b's aliveDistance to shootRadius
+                b.aliveDistance = shootRadius;
+                // Call b.Fire() and pass direction
+                b.Fire(direction);    
+            }
         }
 
         // Use this for initialization

@@ -161,6 +161,7 @@ namespace Minesweeper3D
             // Reveal the selected block
 
             // IF the selected block is a mine
+            if(selectedBlock ==)
                 // Uncover all other mines
             // ELSE IF there are no adjacent mines
                 // Perform Flood Fill algorithm to reveal all empty blocks
@@ -177,9 +178,14 @@ namespace Minesweeper3D
         void Update()
         {
             // IF left mouse button is up
+            if(Input.GetKeyUp(KeyCode.Mouse0))
+            {
                 // IF raycast out from camera hits something
+                if(RaycastHit.)
                     // Get hit object's block component
                     // CALL SelectBlock() and pass in the hit block
+            }
+                
         }
     }
 }

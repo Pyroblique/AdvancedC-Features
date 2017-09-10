@@ -147,6 +147,7 @@ namespace Minesweeper3D
                     {
                         // Get currentBlock at index
                         // IF currentBlock is a mine
+                        
                         // Reveal the mine
                     }
 

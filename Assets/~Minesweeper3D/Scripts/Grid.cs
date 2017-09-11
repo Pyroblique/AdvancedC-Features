@@ -145,10 +145,16 @@ namespace Minesweeper3D
                 {
                     for (int z = 0; z < depth; z++)
                     {
+                        GameObject clone = Instantiate(blockPrefab);
                         // Get currentBlock at index
+                        Block currentBlock = clone.GetComponent<Block>();
                         // IF currentBlock is a mine
-                        
-                        // Reveal the mine
+                        if (currentBlock.isMine)
+                        {
+                            // Reveal the mine
+                            int adjacentMines = GetAdjacentMineCountAt(currentBlock);
+                            currentBlock.Reveal(adjacentMines);
+                        }
                     }
 
                 }
@@ -158,13 +164,21 @@ namespace Minesweeper3D
         // Takes in a block selected by the user in some way to reveal it
         public void SelectBlock(Block selectedBlock)
         {
+            int adjacentMines = GetAdjacentMineCountAt(selectedBlock);
             // Reveal the selected block
-
+            selectedBlock.Reveal(adjacentMines);
             // IF the selected block is a mine
-            if(selectedBlock ==)
+            if (selectedBlock.isMine)
+            {
                 // Uncover all other mines
+                UncoverMines();
+            }
             // ELSE IF there are no adjacent mines
+            else if (adjacentMines == 0)
+            {
                 // Perform Flood Fill algorithm to reveal all empty blocks
+                FFuncover(selectedBlock.x, selectedBlock.y, selectedBlock.z, new bool[width, height, depth]);
+            }
         }
 
         // Use this for initialization
@@ -177,13 +191,25 @@ namespace Minesweeper3D
         // Update is called once per frame
         void Update()
         {
-            // IF left mouse button is up
+            // IF Left Mouse Button Down
             if(Input.GetKeyUp(KeyCode.Mouse0))
             {
-                // IF raycast out from camera hits something
-                if(RaycastHit.)
-                    // Get hit object's block component
-                    // CALL SelectBlock() and pass in the hit block
+                // LET ray = Camera ScreenPoint to Ray Input.MousePosition
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                // LET hit = new RayCastHit
+                RaycastHit hit;
+                // IF PhysicsRaycast ray, out hit
+                if(Physics.Raycast(ray, out hit))
+                {
+                    // LET hitBlock = hit collider's Block component
+                    Block hitblock = hit.collider.GetComponent<Block>();
+                    // IF hitBlock != null
+                    if (hitblock != null)
+                    {
+                        // CALL SetBlock(hitBlock)
+                        SelectBlock(hitblock);
+                    }
+                }
             }
                 
         }
